@@ -5,29 +5,7 @@ import { QueryTypes } from "sequelize";
 
 // [GET] /tours/:slugCategory
 export const index = async (req: Request, res: Response) => {
-  // SELECT * FROM tours WHERE deleted = false AND status = "active"
-  // const tours = await Tour.findAll({
-  //   where: {
-  //     deleted: false,
-  //     status: "active",
-  //   },
-  //   raw: true,
-  // });
-
   const slugCategory = req.params.slugCategory;
-
-  /*
-SELECT tours.*, price * (1 - discount/100) AS price_special
-FROM tours
-JOIN tours_categories ON tours.id = tours_categories.tour_id
-JOIN categories ON tours_categories.category_id = categories.id
-WHERE
-    categories.slug = 'du-lich-trong-nuoc'
-    AND categories.deleted = false
-    AND categories.status = 'active'
-    AND tours.deleted = false
-    AND tours.status = 'active';
-*/
 
   const tours = await sequelize.query(
     `
@@ -59,5 +37,28 @@ WHERE
   res.render("client/pages/tours/index", {
     pageTitle: "Danh sách tour",
     tours: tours,
+  });
+};
+
+// [GET] /tours/detail/:slugTour
+export const detail = async (req: Request, res: Response) => {
+  const slugTour = req.params.slugTour;
+
+  const tourDetail = await Tour.findOne({
+    raw: true,
+    where: {
+      slug: slugTour,
+      deleted: false,
+      status: "active",
+    },
+  });
+
+  tourDetail["images"] = JSON.parse(tourDetail["images"]);
+  tourDetail["price_special"] =
+    tourDetail["price"] * (1 - tourDetail["discount"] / 100);
+
+  res.render("client/pages/tours/detail", {
+    pageTitle: "Chi tiết tour",
+    tourDetail: tourDetail,
   });
 };

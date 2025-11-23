@@ -47,3 +47,143 @@
   color: green;
 }
 /* End box-head */
+
+/* ===== Tour detail layout ===== */
+.tour-detail {
+    padding-bottom: 24px;
+}
+
+.tour-detail .row {
+    margin-bottom: 0;
+}
+
+/* ===== Left: images column ===== */
+.tour-detail .inner-images {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tour-detail .inner-image {
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    background: #fff;
+    overflow: hidden;
+    height: 280px;               /* tạo khoảng trắng dưới ảnh giống hình */
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.tour-detail .inner-image img {
+    width: 100%;
+    height: 200px;               /* ảnh nằm trên, dưới còn khoảng trắng */
+    object-fit: cover;
+    display: block;
+}
+
+/* ===== Right: info column ===== */
+.tour-detail .inner-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #9b2c2c;              /* đỏ đậm giống ảnh */
+    margin-bottom: 12px;
+}
+
+.tour-detail .inner-barcode,
+.tour-detail .inner-time-start,
+.tour-detail .inner-stock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.tour-detail .inner-barcode i,
+.tour-detail .inner-time-start i,
+.tour-detail .inner-stock i {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Prices */
+.tour-detail .inner-price-special {
+    font-size: 22px;
+    font-weight: 700;
+    color: #9b2c2c;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+.tour-detail .inner-price {
+    font-size: 18px;
+    color: #444;
+    text-decoration: line-through;
+    margin-bottom: 6px;
+}
+
+.tour-detail .inner-percent {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+/* Add to cart form */
+.tour-detail form[form-add-to-cart] {
+    margin-top: 6px;
+}
+
+.tour-detail form[form-add-to-cart] input.form-control {
+    height: 38px;
+    font-size: 15px;
+    border-radius: 3px;
+}
+
+.tour-detail form[form-add-to-cart] button.btn {
+    height: 44px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 3px;
+}
+
+/* ===== Bottom info boxes ===== */
+.tour-detail .inner-infomation {
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    background: #fff;
+    padding: 12px 14px;
+    margin-top: 18px;
+}
+
+.tour-detail .inner-infomation .inner-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: #9b2c2c;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.tour-detail .inner-infomation .inner-text {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 767.98px) {
+    .tour-detail .inner-image {
+        height: auto;
+    }
+
+    .tour-detail .inner-image img {
+        height: 220px;
+    }
+
+    .tour-detail .inner-title {
+        font-size: 24px;
+    }
+}
