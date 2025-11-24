@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import Order from "../../models/order.model";
 import { generateOrderCode } from "../../helpers/generate";
+import Tour from "../../models/tour.model";
+import OrderItem from "../../models/order-item.model";
 
-// [GET] /order
+// [POST] /order
 export const order = async (req: Request, res: Response) => {
   const data = req.body;
 
@@ -30,9 +32,37 @@ export const order = async (req: Request, res: Response) => {
     }
   );
 
+  for (const item of data.cart) {
+    const dataItem = {
+      orderId: orderId,
+      tourId: item.tourId,
+      quantity: item.quantity,
+    };
+
+    const tourInfo = await Tour.findOne({
+      where: {
+        id: item.tourId,
+      },
+      raw: true,
+    });
+
+    dataItem["price"] = tourInfo["price"];
+    dataItem["discount"] = tourInfo["discount"];
+    dataItem["timeStart"] = tourInfo["timeStart"];
+
+    await OrderItem.create(dataItem);
+  }
+
   res.json({
     code: 200,
     message: "Đặt hàng thành công!",
     orderCode: code,
+  });
+};
+
+// [GET] /success
+export const success = async (req: Request, res: Response) => {
+  res.render("client/pages/order/success", {
+    pageTitlt: "Đặt hàng thành công!",
   });
 };

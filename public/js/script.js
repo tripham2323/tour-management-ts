@@ -35,24 +35,26 @@ const alertAddCartSuccess = () => {
 
 // End Thông báo
 
-// Mini cart
-const showMiniCart = () => {
-  const cart = JSON.parse(localStorage.getItem("cart"));
-  const totalQuantity = cart.reduce((sum, item) => sum + item.quantity , 0)
-
-  const miniCart = document.querySelector("[mini-cart]");
-  miniCart.innerHTML = totalQuantity;
-} 
-
-showMiniCart();
-// End Mini Cart
-
 // Carts
 // Kiểm tra trong localStorage đã có cart chưa
 const cart = localStorage.getItem("cart");
 if (!cart) {
   localStorage.setItem("cart", JSON.stringify([]));
 }
+
+// Mini cart
+const showMiniCart = () => {
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  const miniCart = document.querySelector("[mini-cart]");
+  if (miniCart) {
+    miniCart.innerHTML = totalQuantity;
+  }
+};
+
+showMiniCart();
+// End Mini Cart
 
 const formAddToCart = document.querySelector("[form-add-to-cart]");
 if (formAddToCart) {
